@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fstn</groupId>
+	<artifactId>rawOrganizer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>RAWOrganizer</name>
+	<dependencies>
+		<dependency>
+			<groupId>it.tidalwave.imageio</groupId>
+			<artifactId>reajent</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>it.tidalwave.imageio</groupId>
+			<artifactId>jrawio-all</artifactId>
+			<version>1.5.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>it.tidalwave.imageio</groupId>
+			<artifactId>jrawio</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1</version>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>snapshots-oss.sonatype.org</id>
+			<name>Sonatype Snapshot Repository</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
+	</repositories>
+</project>
