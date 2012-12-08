@@ -1,0 +1,65 @@
+package fr.zambaux.picsSorting;
+
+
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
+
+import fr.zambaux.picsSorting.controller.MainWindowController;
+import fr.zambaux.picsSorting.view.MainWindow;
+
+public class Main {
+	private static MainWindow mainWindow;
+	private static MainWindowController mainController;
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		Document document = null;
+		Element racine;
+		String filename="src/META-INF/viewConfiguration.xml";
+		 //On crée une instance de SAXBuilder
+	      SAXBuilder sxb = new SAXBuilder();
+	      try
+	      {
+	         //On crée un nouveau document JDOM avec en argument le fichier XML
+	         //Le parsing est terminé ;)
+	         document = sxb.build(new File(filename));
+	         //On initialise un nouvel élément racine avec l'élément racine du document.
+		      racine = document.getRootElement();
+		      //On crée une List contenant tous les noeuds "etudiant" de l'Element racine
+		      List menuPanels = racine.getChild("MenuPanel").getChildren();
+		      
+		      //On crée un Iterator sur notre liste
+		      Iterator i = menuPanels.iterator();
+		      while(i.hasNext())
+		      {
+		         //On recrée l'Element courant à chaque tour de boucle afin de
+		         //pouvoir utiliser les méthodes propres aux Element comme :
+		         //selectionner un noeud fils, modifier du texte, etc...
+		         Element courant = (Element)i.next();
+		         //On affiche le nom de l'element courant
+		         System.out.println("courant "+courant.getAttributeValue("class"));
+		      }
+		   
+			 
+	      }
+	      catch(Exception e){
+	    	  
+	    	  e.printStackTrace();
+	      }
+
+	     
+		mainController = new MainWindowController();
+		mainWindow = new MainWindow();
+		mainWindow.init();
+		mainWindow.setVisible(true);
+	}
+
+}
