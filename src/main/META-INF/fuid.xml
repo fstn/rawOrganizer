@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fuid>
 <views>
-	<view class="org.fstn.rawOrganizer.MenuCommand"/>
+	<view class="org.fstn.rawOrganizer.view.NorthMenu"/>
+	<view class="org.fstn.rawOrganizer.view.EastMenu"/>
+	<view class="org.fstn.rawOrganizer.view.SouthMenu"/>
+	<view class="org.fstn.rawOrganizer.view.CenterMenu"/>
 </views>
 </fuid>

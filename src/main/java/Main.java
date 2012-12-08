@@ -1,6 +1,5 @@
 import org.fuid.FuidRunner;
 
-
 public class Main {
 
 	public Main() {
@@ -10,9 +9,10 @@ public class Main {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		FuidRunner runner=new FuidRunner();
-		runner.run("rawOrganizer/src/main/META-INF/fuid.xml");
+	public static void main(final String[] args) {
+		FuidRunner runner = new FuidRunner();
+		runner.loadConfig("src/main/META-INF/fuid.xml");
+		runner.run();
 
 	}
 
