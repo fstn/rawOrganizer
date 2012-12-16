@@ -4,6 +4,7 @@
 	<view class="org.fstn.rawOrganizer.view.NorthMenu"/>
 	<view class="org.fstn.rawOrganizer.view.EastMenu"/>
 	<view class="org.fstn.rawOrganizer.view.SouthMenu"/>
-	<view class="org.fstn.rawOrganizer.view.CenterMenu"/>
+	<view class="org.fstn.rawOrganizer.view.FileChooserPanel"/>
+	<view class="org.fstn.rawOrganizer.view.PicsViewer"/>
 </views>
 </fuid>

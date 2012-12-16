@@ -10,41 +10,53 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.fstn.rawOrganizer.controller.PicsViewerController;
 import org.fstn.rawOrganizer.controller.dto.ImageDTO;
-import org.fstn.rawOrganizer.event.InitializedEvent;
-import org.fstn.rawOrganizer.event.InitializedListener;
-import org.fstn.rawOrganizer.event.ViewEvent;
-import org.fstn.rawOrganizer.util.Session;
+import org.fstn.rawOrganizer.event.EventType;
+import org.fuid.Session;
+import org.fuid.annotation.CloseOn;
+import org.fuid.annotation.Controller;
+import org.fuid.annotation.Location;
+import org.fuid.annotation.OpenOn;
+import org.fuid.event.FuidEvent;
+import org.fuid.event.FuidEventType;
+import org.fuid.event.FuidListener;
 
-public class PicsViewer extends JScrollPane implements InitializedListener {
+@Location(location = Location.SOUTH, index = 1)
+@OpenOn(event = FuidEventType.INIT)
+@CloseOn(event = FuidEventType.CLOSE)
+@Controller(name = PicsViewerController.class)
+public class PicsViewer extends JScrollPane implements FuidListener {
 	private JPanel content;
+
 	public PicsViewer() {
-		Session.getInstance().addInitializedListener(this);
-		content=new JPanel();
+		Session.getInstance().addListener(this);
+		content = new JPanel();
 		content.setBackground(Color.black);
-		content.setLayout(new BoxLayout(content,BoxLayout.PAGE_AXIS));
+		content.setLayout(new BoxLayout(content, BoxLayout.PAGE_AXIS));
 		content.setPreferredSize(new Dimension(380, 800));
 		content.setVisible(true);
 		this.getViewport().add(content);
 
-		this.setPreferredSize(new Dimension(400,300));
+		this.setPreferredSize(new Dimension(400, 300));
 	}
 
-	@Override
-	public void onEvent(InitializedEvent event) {
-		List<ImageDTO> listImage = event.getListImages();
-		for (ImageDTO imageDTO : listImage) {
-			ImageIcon imageMiniature = new ImageIcon(imageDTO.getImage());
-			JLabel imageLabel = new JLabel();
-			imageLabel.setText(imageDTO.getName());
-			imageLabel.setIcon(imageMiniature);
-			content.add(imageLabel);
-			Session.getInstance().fireEvent(new ViewEvent(ViewEvent.ASK4RELOAD, null));
+	public void clean() {
+		Session.getInstance().removeListener(this);
+	}
+
+	public void onEvent(FuidEvent event) {
+
+		if (event.getType() == EventType.SHOWFILES) {
+			List<ImageDTO> listImage = (List<ImageDTO>) event.getArg();
+			for (ImageDTO imageDTO : listImage) {
+				ImageIcon imageMiniature = new ImageIcon(imageDTO.getImage());
+				JLabel imageLabel = new JLabel();
+				imageLabel.setText(imageDTO.getName());
+				imageLabel.setIcon(imageMiniature);
+				content.add(imageLabel);
+			}
+
 		}
 	}
-	@Override
-	public void finalize(){
-		Session.getInstance().removeInitializedListener(this);
-	}
-
 }

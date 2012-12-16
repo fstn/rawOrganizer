@@ -1,4 +1,4 @@
-package fr.zambaux.picsSorting.dto;
+package org.fstn.rawOrganizer.controller.dto;
 
 import java.awt.Image;
 

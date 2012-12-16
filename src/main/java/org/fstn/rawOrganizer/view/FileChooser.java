@@ -1,36 +1,49 @@
-package fr.zambaux.picsSorting.view;
+package org.fstn.rawOrganizer.view;
 
-import java.awt.LayoutManager;
-import java.awt.Panel;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 
-import org.fstn.rawOrganizer.event.ViewEvent;
-import org.fstn.rawOrganizer.util.Session;
+import org.fstn.rawOrganizer.event.EventType;
+import org.fuid.Session;
+import org.fuid.event.FuidEvent;
+import org.fuid.event.FuidEventType;
 
-public class FileChooser extends Panel {
+public class FileChooser extends JPanel {
+	private JPanel element;
 
 	public FileChooser() {
 		super();
-		JFileChooser jfChooser = new JFileChooser();
-		this.add(jfChooser);
-		jfChooser.setCurrentDirectory(new File("C:/"));
-		jfChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		jfChooser.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Session.getInstance().fireEvent(new ViewEvent(ViewEvent.FILECHOOSE, ((JFileChooser)arg0.getSource()).getSelectedFile()));				
+		element = this;
+		this.setBackground(Color.gray);
+
+		JButton browse = new JButton("Parcourir");
+		this.add(browse);
+		browse.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser jfChooser = new JFileChooser();
+				jfChooser.setVisible(true);
+				jfChooser.setCurrentDirectory(new File(
+						"/media/fstn/9C60CF5C60CF3BB0/a trier"));
+				jfChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int returnVal = jfChooser.showOpenDialog(element.getParent());
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					Session.getInstance().fireEvent(
+							new FuidEvent(EventType.FILECHOOSE, jfChooser
+									.getSelectedFile()));
+					Session.getInstance().fireEvent(
+							new FuidEvent(FuidEventType.REPACK,null));
+				}
 			}
 		});
 	}
 
-	public FileChooser(LayoutManager layout) {
-		super(layout);
-		// TODO Auto-generated constructor stub
-	}
 
 }

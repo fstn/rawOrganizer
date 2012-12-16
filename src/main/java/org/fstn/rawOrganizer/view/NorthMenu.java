@@ -24,7 +24,6 @@ import org.fuid.view.design.TopElement;
 public class NorthMenu extends JPanel implements TopElement {
 
 	public NorthMenu() {
-		this.setPreferredSize(new Dimension(1000,1000));
 		JButton jb = new JButton("coucou");
 		this.add(jb);
 		this.setBackground(Color.GREEN);

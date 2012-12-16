@@ -8,18 +8,21 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.metadata.IIOMetadata;
 
-import fr.zambaux.picsSorting.Session.Session;
-import fr.zambaux.picsSorting.event.InitializedEvent;
-import fr.zambaux.picsSorting.event.ViewEvent;
-import fr.zambaux.picsSorting.event.ViewListener;
-import fr.zambaux.picsSorting.view.PicsViewer;
+import org.fstn.rawOrganizer.event.EventType;
+import org.fstn.rawOrganizer.event.InitializedEvent;
+import org.fstn.rawOrganizer.util.Util;
+import org.fstn.rawOrganizer.view.PicsViewer;
+import org.fuid.Session;
+import org.fuid.controller.Controller;
+import org.fuid.event.FuidEvent;
+import org.fuid.event.FuidListener;
 
-public class PicsViewerController implements ViewListener {
+public class PicsViewerController implements  FuidListener, Controller {
 
 	private PicsViewer picsViewer;
 
 	public PicsViewerController() {
-		Session.getInstance().addViewListener(this);
+		Session.getInstance().addListener(this);
 	}
 
 	public PicsViewer getPicsViewer() {
@@ -30,18 +33,17 @@ public class PicsViewerController implements ViewListener {
 		this.picsViewer = picsViewer;
 	}
 
-	@Override
-	public void onEvent(ViewEvent event) {
-		if (event.getType() == ViewEvent.FILECHOOSE) {
-			System.out.println("dossier choisis: " + event.getArg());
-			InitializedEvent initEvent = new InitializedEvent(InitializedEvent.INIT);
+	public void onEvent(FuidEvent event) {
+		if (event.getType() == EventType.FILECHOOSE) {
+			System.out.println(this.getClass().getName()+": Controller dossier choisi: " + event.getArg());
+			InitializedEvent initEvent = new InitializedEvent(EventType.SHOWFILES);
 			if (event.getArg() != null) {
 				File[] files = null;
 				File directoryToScan = (File) event.getArg();
 				files = directoryToScan.listFiles();
 				for (File file : files) {
 					String fileName = file.getName();
-					if (fileName.contains(".")) {
+					if (Util.isImage(fileName)) {
 
 						try {
 							String shortName = fileName.substring(1,
@@ -78,6 +80,9 @@ public class PicsViewerController implements ViewListener {
 								 */
 
 							}
+						} catch (StringIndexOutOfBoundsException e) {
+							System.out.println(e + " " + fileName);
+
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -88,10 +93,9 @@ public class PicsViewerController implements ViewListener {
 			}
 		}
 	}
-
-	@Override
-	public void finalize() {
-		Session.getInstance().removeViewListener(this);
+	
+	public void clean() {
+		Session.getInstance().removeListener(this);
 	}
 
 }
