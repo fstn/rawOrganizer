@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout.Constraints;
 
+import org.fstn.rawOrganizer.view.component.ImageButton;
 import org.fuid.annotation.CloseOn;
 import org.fuid.annotation.Location;
 import org.fuid.annotation.OpenOn;
@@ -18,16 +19,16 @@ import org.fuid.annotation.Top;
 import org.fuid.event.FuidEventType;
 import org.fuid.view.design.TopElement;
 
-@Location(location = Location.NORTH, index = 1)
-@OpenOn(event=FuidEventType.INIT)
-@CloseOn(event=FuidEventType.CLOSE)
+@Location(location = Location.NORTH)
+@OpenOn(event={FuidEventType.INIT})
+@CloseOn(event={FuidEventType.CLOSE})
 public class NorthMenu extends JPanel implements TopElement {
 
 	public NorthMenu() {
-		JButton jb = new JButton("coucou");
-		this.add(jb);
-		this.setBackground(Color.GREEN);
+		this.add(new ImageButton("/back.png", FuidEventType.INIT));
+		this.add(new ImageButton("/quit.png", FuidEventType.CLOSE));
 		this.setVisible(true);
+		this.setBackground(Color.BLACK);
 	}
 
 }

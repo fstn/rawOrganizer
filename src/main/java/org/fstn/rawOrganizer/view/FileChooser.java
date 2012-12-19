@@ -20,7 +20,7 @@ public class FileChooser extends JPanel {
 	public FileChooser() {
 		super();
 		element = this;
-		this.setBackground(Color.gray);
+		this.setBackground(Color.BLACK);
 
 		JButton browse = new JButton("Parcourir");
 		this.add(browse);

@@ -18,9 +18,9 @@ import org.fuid.event.FuidEventType;
 import org.fuid.event.FuidListener;
 import org.fuid.view.design.TopElement;
 
-@Location(location = Location.EAST, index = 1)
-@OpenOn(event = FuidEventType.INIT)
-@CloseOn(event = EventType.SHOWFILES)
+@Location(location = Location.EAST)
+@OpenOn(event = {EventType.RAW_SELECTED,EventType.JPG_SELECTED})
+@CloseOn(event = {FuidEventType.CLOSE})
 @Controller(name = FileChooserController.class)
 public class FileChooserPanel extends JPanel implements TopElement,
 		FuidListener {
@@ -29,13 +29,13 @@ public class FileChooserPanel extends JPanel implements TopElement,
 	PicsViewer picsVIewer;
 
 	public FileChooserPanel() throws HeadlessException {
-		this.setBackground(Color.MAGENTA);
 		Session.getInstance().addListener(this);
 		fileChooser = new FileChooser();
 		this.setVisible(true);
 
 		BorderLayout mainLayout = new BorderLayout();
 		this.setLayout(mainLayout);
+		this.setBackground(Color.BLACK);
 
 		this.add(fileChooser, BorderLayout.WEST);
 		Session.getInstance().fireEvent(new FuidEvent(FuidEventType.REPACK,null));
