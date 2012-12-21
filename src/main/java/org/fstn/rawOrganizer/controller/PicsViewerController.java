@@ -3,6 +3,8 @@ package org.fstn.rawOrganizer.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -19,6 +21,7 @@ import org.fuid.event.FuidListener;
 
 public class PicsViewerController implements  FuidListener, Controller {
 
+	Logger logger=Logger.getLogger(PicsViewerController.class.getCanonicalName());
 	private PicsViewer picsViewer;
 
 	public PicsViewerController() {
@@ -35,7 +38,7 @@ public class PicsViewerController implements  FuidListener, Controller {
 
 	public void onEvent(FuidEvent event) {
 		if (event.getType() == EventType.FILECHOOSE) {
-			System.out.println(this.getClass().getName()+": Controller dossier choisi: " + event.getArg());
+			logger.info(this.getClass().getName()+": Controller dossier choisi: " + event.getArg());
 			InitializedEvent initEvent = new InitializedEvent(EventType.SHOWFILES);
 			if (event.getArg() != null) {
 				File[] files = null;
@@ -53,7 +56,7 @@ public class PicsViewerController implements  FuidListener, Controller {
 							ImageIO.scanForPlugins();
 							String[] list = ImageIO.getReaderFormatNames();
 							if (file.getName().toUpperCase().endsWith(".NEF")) {
-								System.out.printf("Processing %s...\n",
+								logger.info("Processing %s...\n"+
 										file.getCanonicalPath());
 								final ImageReader reader = (ImageReader) ImageIO
 										.getImageReaders(file).next();
@@ -81,11 +84,10 @@ public class PicsViewerController implements  FuidListener, Controller {
 
 							}
 						} catch (StringIndexOutOfBoundsException e) {
-							System.out.println(e + " " + fileName);
+							logger.log(Level.SEVERE,"",e);
 
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							logger.log(Level.SEVERE,"",e);
 						}
 					}
 				}

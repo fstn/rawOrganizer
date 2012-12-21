@@ -2,8 +2,6 @@
 <fuid>
 <views>
 	<view class="org.fstn.rawOrganizer.view.WelcomeView"/>
-	<view class="org.fstn.rawOrganizer.view.menu.Open"/>
-	<view class="org.fstn.rawOrganizer.view.menu.Resize"/>
 	<view class="org.fstn.rawOrganizer.view.menu.Export"/>
 	<view class="org.fstn.rawOrganizer.view.menu.WaterMark"/>
 	<view class="org.fstn.rawOrganizer.view.ImageDetailView"/>
@@ -12,6 +10,8 @@
 	<view class="org.fstn.rawOrganizer.view.PicsViewer"/>
 	<view class="org.fstn.rawOrganizer.view.JPGV‪iewer"/>
 	<view class="org.fstn.rawOrganizer.view.ResizeView"/>
+	<view class="org.fstn.rawOrganizer.view.menu.Open"/>
+	<view class="org.fstn.rawOrganizer.view.menu.Resize"/>
 	
 	
 </views>
