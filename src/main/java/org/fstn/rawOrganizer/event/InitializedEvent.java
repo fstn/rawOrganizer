@@ -11,11 +11,10 @@ public class InitializedEvent extends FuidEvent{
 
 	public InitializedEvent(String type) {
 		super(type,null);
-		arg = new ArrayList<ImageDTO>();
 		
 	}
 
-	public void addImage(BufferedImage image, String name, String url) {
-		((ArrayList<ImageDTO>)arg).add(new ImageDTO(image, url, name));
+	public void addImage(ImageDTO imageDTO) {
+		arg=imageDTO;
 	}
 }

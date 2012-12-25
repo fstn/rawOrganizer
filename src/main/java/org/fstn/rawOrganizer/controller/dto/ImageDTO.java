@@ -1,37 +1,58 @@
 package org.fstn.rawOrganizer.controller.dto;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class ImageDTO {
 
-	private Image image;
-	private String url;
-	private String name;
-	public ImageDTO(Image image, String url, String name) {
-		super();
-		this.image = image;
-		this.url = url;
-		this.name = name;
-	}
-	public Image getImage() {
-		return image;
-	}
-	public void setImage(Image image) {
-		this.image = image;
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
+	private BufferedImage miniatureImage;
+	private BufferedImage originalImage;
+	private File miniature;
+	private File original;
 
+	public ImageDTO(File miniature, File original) {
+		super();
+		this.miniature = miniature;
+		this.original = original;
+	}
+
+	public BufferedImage getMiniature() {
+		if (miniatureImage == null) {
+			try {
+				miniatureImage = ImageIO.read(miniature);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return miniatureImage;
+	}
+
+	public BufferedImage getOriginal() {
+		if (originalImage == null) {
+			try {
+				originalImage = ImageIO.read(original);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return originalImage;
+
+	}
+
+	public void setImage(BufferedImage image) {
+		this.miniatureImage = image;
+	}
+
+	public String getUrl() {
+		return original.getAbsolutePath();
+	}
+
+	public String getName() {
+		return original.getName();
+	}
 }

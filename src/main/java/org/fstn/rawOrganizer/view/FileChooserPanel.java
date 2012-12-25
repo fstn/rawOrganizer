@@ -2,9 +2,6 @@ package org.fstn.rawOrganizer.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.HeadlessException;
-
-import javax.swing.JPanel;
 
 import org.fstn.rawOrganizer.controller.FileChooserController;
 import org.fstn.rawOrganizer.event.EventType;
@@ -16,19 +13,19 @@ import org.fuid.annotation.OpenOn;
 import org.fuid.event.FuidEvent;
 import org.fuid.event.FuidEventType;
 import org.fuid.event.FuidListener;
-import org.fuid.view.design.TopElement;
+import org.fuid.event.FuidResizeEvent;
+import org.fuid.view.FuidViewElement;
 
 @Location(location = Location.EAST)
-@OpenOn(event = {EventType.RAW_SELECTED,EventType.JPG_SELECTED})
-@CloseOn(event = {FuidEventType.CLOSE})
+@OpenOn(event = { EventType.RAW_SELECTED, EventType.JPG_SELECTED , EventType.PNG_SELECTED})
+@CloseOn(event = { FuidEventType.CLOSE })
 @Controller(name = FileChooserController.class)
-public class FileChooserPanel extends JPanel implements TopElement,
-		FuidListener {
+public class FileChooserPanel extends FuidViewElement implements FuidListener {
 
-	FileChooser fileChooser;
-	PicsViewer picsVIewer;
+	private static final long serialVersionUID = 7351344948672669667L;
+	private FileChooser fileChooser;
 
-	public FileChooserPanel() throws HeadlessException {
+	public FileChooserPanel() {
 		Session.getInstance().addListener(this);
 		fileChooser = new FileChooser();
 		this.setVisible(true);
@@ -38,24 +35,28 @@ public class FileChooserPanel extends JPanel implements TopElement,
 		this.setBackground(Color.BLACK);
 
 		this.add(fileChooser, BorderLayout.WEST);
-		Session.getInstance().fireEvent(new FuidEvent(FuidEventType.REPACK,null));
+		Session.getInstance().fireEvent(
+				new FuidEvent(FuidEventType.REPACK, null));
 	}
 
 	@Override
-	public void setVisible(boolean b) {
+	public final void setVisible(final boolean b) {
 
 		super.setVisible(b);
 	}
 
-	
-	public void clean() {
+	public final void clean() {
 		Session.getInstance().removeListener(this);
 	}
 
-
-	public void onEvent(FuidEvent event) {
+	public final void onEvent(final FuidEvent event) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public final void onResize(final FuidResizeEvent fuidResizeEvent) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

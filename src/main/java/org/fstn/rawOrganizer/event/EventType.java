@@ -8,6 +8,7 @@ public class EventType {
 	public static final String JPG_SELECTED = "JPG_SELECTED";
 	public static final String RAW_SELECTED = "RAW_SELECTED";
 	public static final String PNG_SELECTED = "PNG_SELECTED";
+	public static final String ADD_IMAGE = "ADD_IMAGE";
 	
 	
 }
