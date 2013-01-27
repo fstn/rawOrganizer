@@ -15,8 +15,8 @@ import magick.MagickImage;
 import org.apache.commons.io.IOUtils;
 
 public class Cache {
-	private static double cacheWidth = 200;
-	private static double cacheHeight = 200;
+	private static double cacheWidth = 100;
+	private static double cacheHeight = 100;
 	private static Cache instance = new Cache();
 
 	private Cache() {

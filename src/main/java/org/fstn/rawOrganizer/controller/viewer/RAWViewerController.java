@@ -12,8 +12,8 @@ import javax.imageio.metadata.IIOMetadata;
 
 import org.fstn.rawOrganizer.event.EventType;
 import org.fstn.rawOrganizer.event.InitializedEvent;
+import org.fstn.rawOrganizer.util.SessionConstante;
 import org.fstn.rawOrganizer.util.Util;
-import org.fstn.rawOrganizer.view.SessionConstante;
 import org.fstn.rawOrganizer.view.viewer.PicsViewer;
 import org.fuid.Session;
 import org.fuid.controller.Controller;

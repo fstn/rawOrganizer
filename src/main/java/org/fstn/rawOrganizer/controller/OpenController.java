@@ -1,7 +1,7 @@
 package org.fstn.rawOrganizer.controller;
 
 import org.fstn.rawOrganizer.event.EventType;
-import org.fstn.rawOrganizer.view.SessionConstante;
+import org.fstn.rawOrganizer.util.SessionConstante;
 import org.fuid.Session;
 import org.fuid.controller.Controller;
 import org.fuid.event.FuidEvent;
